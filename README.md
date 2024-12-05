@@ -9,7 +9,7 @@ Banco de dados MySQL configurado.
 
 Clone o repositório :
 
-git clone https://github.com/DaniloCalado/To-Do_list-Stoix-Challenge.git
+git clone https://github.com/DaniloCalado/To-Do-list-Stoix-Challenge.git
 cd To-Do-list-Stoix-Challenge
 
 Crie o banco de dados MySQL Execute o comando abaixo no terminal para criar um banco de dados MySQL:

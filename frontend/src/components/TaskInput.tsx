@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import api, { getCsrfToken } from "../services/api";
+import api, { getCsrfToken, fetchTasks} from "../services/api";
 import { toast } from "react-toastify";
+import { Task } from "../types/task";
 
-const TaskInput: React.FC = () => {
+interface TaskInputProps {
+  onAddTask: (task: Task[]) => void;
+}
+
+const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -11,20 +16,20 @@ const TaskInput: React.FC = () => {
       toast.error("O título da tarefa é obrigatório!");
       return;
     }
-
     try {
       await getCsrfToken();
       const response = await api.post("/tasks", { title, description });
-
       toast.success(response.data.message || "Tarefa criada com sucesso!");
       setTitle("");
       setDescription("");
+      const updatedTasks = await fetchTasks();
+      onAddTask(updatedTasks);
     } catch (error) {
       console.error("Erro ao criar tarefa:", error);
       toast.error("Erro ao criar a tarefa. Tente novamente mais tarde.");
     }
   };
-
+  
   return (
     <div className="bg-white p-4 shadow rounded-lg max-w-lg mx-auto">
       <h2 className="text-m font-bold mb-4 text-center">Adicionar Nova Tarefa</h2>

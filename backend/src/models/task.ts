@@ -1,5 +1,6 @@
 import { pool } from '../config/database';
 import { ResultSetHeader } from 'mysql2';
+import { TaskInput } from '../interfaces/interfaces';
 
 
 export const getAllTasks = async () => {
@@ -17,5 +18,29 @@ export const createTask = async (title: string, description: string): Promise<Re
 
 export const deleteTask = async (id: number): Promise<ResultSetHeader> => {
     const [result] = await pool.query<ResultSetHeader>('DELETE FROM tasks WHERE id = ?', [id]);
+    return result;
+};
+
+export const updateTask = async (
+    id: number,
+    task: Partial<TaskInput & { completed: boolean }>
+): Promise<ResultSetHeader> => {
+    const { title, description } = task;
+    const [result] = await pool.query<ResultSetHeader>(
+        'UPDATE tasks SET title = ?, description = ? WHERE id = ?',
+        [title, description, id]
+    );
+    return result;
+};
+
+export const updateCompletedStatus = async (
+    id: number,
+    task: Partial<TaskInput & { completed: boolean }>
+): Promise<ResultSetHeader> => {
+    const { completed} = task;
+    const [result] = await pool.query<ResultSetHeader>(
+        'UPDATE tasks SET completed = ? WHERE id = ?',
+        [completed, id]
+    );
     return result;
 };

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskTable from "./components/TasksTable";
-import TaskEditModal from "./components/modals/TaskEditModal"; 
+import TaskEditModal from "./components/modals/TaskEditModal";
+import ConfirmationModal from "./components/modals/ConfirmationModal"; 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Task } from "./types/task";
@@ -12,6 +13,11 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState<number | null>(null);
+
+  const taskToDeleteTitle =
+  taskToDelete !== null ? tasks.find((task) => task.id === taskToDelete)?.title : "";
 
   useEffect(() => {
     const getTasks = async () => {
@@ -27,15 +33,24 @@ const App: React.FC = () => {
     setTasks(updatedTasks);
   };
 
-  const handleDeleteTask = async (id: number) => {
-    try {
-      await deleteTask(id);
-      toast.success("Tarefa excluída com sucesso!");
-      const updatedTasks = await fetchTasks();
-      setTasks(updatedTasks);
-    } catch (error) {
-      toast.error("Erro ao excluir tarefa.");
+  const handleDeleteTaskClick = (id: number) => {
+    setTaskToDelete(id);
+    setIsConfirmationOpen(true);
+  };
+
+  const confirmDeleteTask = async () => {
+    if (taskToDelete !== null) {
+      try {
+        await deleteTask(taskToDelete);
+        toast.success("Tarefa excluída com sucesso!");
+        const updatedTasks = await fetchTasks();
+        setTasks(updatedTasks);
+      } catch (error) {
+        toast.error("Erro ao excluir tarefa.");
+      }
     }
+    setIsConfirmationOpen(false);
+    setTaskToDelete(null);
   };
 
   const handleToggleCompleted = async (id: number) => {
@@ -82,7 +97,7 @@ const App: React.FC = () => {
         tasks={tasks}
         isLoading={isLoading}
         onEdit={handleEditClick}
-        onDelete={handleDeleteTask}
+        onDelete={handleDeleteTaskClick}
         onToggleCompleted={handleToggleCompleted}
       />
       {isModalOpen && selectedTask && (
@@ -93,6 +108,12 @@ const App: React.FC = () => {
           onEdit={handleEditSubmit}
         />
       )}
+      <ConfirmationModal
+        isOpen={isConfirmationOpen}
+        onConfirm={confirmDeleteTask}
+        onCancel={() => setIsConfirmationOpen(false)}
+        taskTitle={taskToDeleteTitle}
+      />
     </div>
   );
 };

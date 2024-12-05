@@ -6,17 +6,13 @@ Pré-requisitos
 Node.js instalado (versão 16 ou superior recomendada).
 Docker e Docker Compose instalados (opcional, caso deseje executar via containers).
 Banco de dados MySQL configurado.
-Configuração Manual
-Clone o repositório
 
-bash
-Copiar código
+Clone o repositório :
+
 git clone https://github.com/DaniloCalado/To-Do_list-Stoix-Challenge.git
-cd To-Do_list-Stoix-Challenge
-Crie o banco de dados MySQL Execute o comando abaixo no terminal para criar um banco de dados MySQL:
+cd To-Do-list-Stoix-Challenge
 
-sql
-Copiar código
+Crie o banco de dados MySQL Execute o comando abaixo no terminal para criar um banco de dados MySQL:
 CREATE DATABASE nome_do_banco;
 Configure o arquivo .env Na raiz da pasta backend, crie um arquivo chamado .env com as informações de acesso ao banco de dados:
 

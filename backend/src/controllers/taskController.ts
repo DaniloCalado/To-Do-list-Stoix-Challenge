@@ -45,7 +45,7 @@ export const editTask = async (
             res.status(404).json({ error: 'Tarefa não Econtrada' });
             return;
         }
-        res.json({ id: Number(id), title, description, message: 'Tarefa Editada com Sucesso' });
+        res.json({ id: Number(id), title, description });
     } catch (error) {
         res.status(500).json({ error: 'Erro ao Editar Tarefa' });
     }
@@ -65,7 +65,7 @@ export const editCompletedStatus = async (
             return;
         }
 
-        res.json({ id: Number(id), completed, message: 'Status da tarefa atualizado com sucesso' });
+        res.json({ id: Number(id), completed });
     } catch (error) {
         res.status(500).json({ error: 'Erro ao atualizar o status da tarefa' });
     }

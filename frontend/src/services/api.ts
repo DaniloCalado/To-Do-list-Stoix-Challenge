@@ -1,4 +1,5 @@
 import axios from "axios";
+import { Task } from "../types/task";
 
 const api = axios.create({
   baseURL: "http://localhost:4000/api",
@@ -54,6 +55,17 @@ export const getCsrfToken = async () => {
       return response.data;
     } catch (error) {
       console.error("Erro ao alternar o status de conclusão da tarefa", error);
+      throw error;
+    }
+  };
+
+  export const updateTask = async (updatedTask: Task) => {
+    try {
+      await getCsrfToken();
+      const response = await api.put(`/tasks/${updatedTask.id}`, updatedTask);
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao editar tarefa", error);
       throw error;
     }
   };

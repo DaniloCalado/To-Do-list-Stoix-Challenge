@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskTable from "./components/TasksTable";
+import TaskEditModal from "./components/modals/TaskEditModal"; 
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Task } from "./types/task";
-import { deleteTask, fetchTasks, updateTaskCompletion } from "./services/api";
+import { deleteTask, fetchTasks, updateTask, updateTaskCompletion } from "./services/api";
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const getTasks = async () => {
@@ -49,6 +52,27 @@ const App: React.FC = () => {
     }
   };
 
+  const handleEditClick = (id: number) => {
+    const taskToEdit = tasks.find((task) => task.id === id);
+    if (taskToEdit) {
+      setSelectedTask(taskToEdit);
+      setIsModalOpen(true);
+    }
+  };
+
+  const handleEditSubmit = async (updatedTask: Task) => {
+    try {
+      await updateTask(updatedTask);
+      const updatedTasks = tasks.map((task) =>
+        task.id === updatedTask.id ? updatedTask : task
+      );
+      setTasks(updatedTasks);
+      toast.success("Tarefa editada com sucesso!");
+    } catch (error) {
+      toast.error("Erro ao editar tarefa.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-2xl font-bold text-center mb-4">Minha Lista de Tarefas</h1>
@@ -57,10 +81,18 @@ const App: React.FC = () => {
       <TaskTable
         tasks={tasks}
         isLoading={isLoading}
-        onEdit={(id) => console.log("Edit", id)}
+        onEdit={handleEditClick}
         onDelete={handleDeleteTask}
         onToggleCompleted={handleToggleCompleted}
       />
+      {isModalOpen && selectedTask && (
+        <TaskEditModal
+          task={selectedTask}
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onEdit={handleEditSubmit}
+        />
+      )}
     </div>
   );
 };

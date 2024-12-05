@@ -55,7 +55,7 @@ Checkbox para marcar como concluídas.
 Modais de Confirmação
 
 Edição:
-O botão "Salvar" só é habilitado se houver alterações nos campos de título ou descrição.
+O botão "Confirmar Edição" só é habilitado se houver alterações nos campos de título ou descrição.
 Deleção:
 Modal com o nome da tarefa para confirmar ou cancelar a exclusão.
 

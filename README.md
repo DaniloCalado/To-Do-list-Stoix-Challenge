@@ -16,8 +16,6 @@ Crie o banco de dados MySQL Execute o comando abaixo no terminal para criar um b
 CREATE DATABASE nome_do_banco;
 Configure o arquivo .env Na raiz da pasta backend, crie um arquivo chamado .env com as informações de acesso ao banco de dados:
 
-makefile
-Copiar código
 DB_HOST=localhost
 DB_USER=nome_do_usuario
 DB_PASSWORD=senha

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import TaskInput from "./components/TaskInput";
 import TaskTable from "./components/TasksTable";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Task } from "./types/task";
-import { fetchTasks } from "./services/api";
+import { deleteTask, fetchTasks } from "./services/api";
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -24,6 +24,17 @@ const App: React.FC = () => {
     setTasks(updatedTasks);
   };
 
+  const handleDeleteTask = async (id: number) => {
+    try {
+      await deleteTask(id);
+      toast.success("Tarefa excluída com sucesso!");
+      const updatedTasks = await fetchTasks();
+      setTasks(updatedTasks);
+    } catch (error) {
+      toast.error("Erro ao excluir tarefa.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-2xl font-bold text-center mb-4">Minha Lista de Tarefas</h1>
@@ -33,7 +44,7 @@ const App: React.FC = () => {
         tasks={tasks}
         isLoading={isLoading}
         onEdit={(id) => console.log("Edit", id)}
-        onDelete={(id) => console.log("Delete", id)}
+        onDelete={handleDeleteTask}
         onToggleCompleted={(id) => console.log("Toggle", id)}
       />
     </div>

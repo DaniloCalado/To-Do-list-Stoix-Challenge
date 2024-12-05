@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api, { getCsrfToken, fetchTasks} from "../services/api";
+import api, { getCsrfToken, fetchTasks, addTask} from "../services/api";
 import { toast } from "react-toastify";
 import { Task } from "../types/task";
 
@@ -17,9 +17,8 @@ const TaskInput: React.FC<TaskInputProps> = ({ onAddTask }) => {
       return;
     }
     try {
-      await getCsrfToken();
-      const response = await api.post("/tasks", { title, description });
-      toast.success(response.data.message || "Tarefa criada com sucesso!");
+      const response = await addTask(title, description);
+      toast.success(response.message || "Tarefa criada com sucesso!");
       setTitle("");
       setDescription("");
       const updatedTasks = await fetchTasks();

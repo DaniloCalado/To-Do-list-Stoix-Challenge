@@ -30,7 +30,7 @@ const TaskTable: React.FC<TaskTableProps> = ({
   const sortedTasks = [...tasks].sort(
     (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
   );
-
+  
   return (
     <div className="overflow-x-auto py-4 md:px-36">
       <table className="min-w-full bg-white border border-gray-200">
@@ -38,16 +38,18 @@ const TaskTable: React.FC<TaskTableProps> = ({
           <tr className="bg-gray-100 text-left">
             <th className="px-4 py-2">Data de Criação</th>
             <th className="px-4 py-2">Título</th>
-            <th className="px-4 py-2 hidden md:table">Descrição</th>
-            <th className="px-4 py-2">Concluída</th>
+            <th className="sm:py-4 py-2 hidden md:block">Descrição</th>
+            <th className="md:px-4 py-2">Concluída</th>
             <th className="px-4 py-2">Ações</th>
           </tr>
         </thead>
         <tbody>
           {sortedTasks.map((task) => (
-            <tr key={task.id} className="border-b border-gray-200">
-              <td className="px-4 py-2">
-                {format(new Date(task.created_at), "dd/MM/yyyy", { locale: pt })}
+            <tr key={task.id} className="border-b border-gray-300">
+              <td className="px-1 md:px-4 py-2">
+                {format(new Date(task.created_at), "dd/MM/yyyy", {
+                  locale: pt,
+                })}
               </td>
               <td className="px-4 py-2">{task.title}</td>
               <td className="px-4 py-2 hidden md:table">{task.description}</td>
@@ -56,14 +58,20 @@ const TaskTable: React.FC<TaskTableProps> = ({
                   type="checkbox"
                   checked={task.completed === 1}
                   onChange={() => onToggleCompleted(task.id)}
-                  className="cursor-pointer"
+                  className="cursor-pointer ml-4 md:ml-8"
                 />
               </td>
-              <td className="px-4 py-2 flex space-x-2">
-                <button onClick={() => onEdit(task.id)} className="text-blue-500 hover:text-blue-700">
+              <td className="px-4 py-8 sm:py-12 md:py-4 flex space-x-2">
+                <button
+                  onClick={() => onEdit(task.id)}
+                  className="text-blue-500 hover:text-blue-700"
+                >
                   <FaEdit />
                 </button>
-                <button onClick={() => onDelete(task.id)} className="text-red-500 hover:text-red-700">
+                <button
+                  onClick={() => onDelete(task.id)}
+                  className="text-red-500 hover:text-red-700"
+                >
                   <FaTrash />
                 </button>
               </td>

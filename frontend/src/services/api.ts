@@ -17,6 +17,7 @@ export const getCsrfToken = async () => {
 
   export const fetchTasks = async () => {
     try {
+      await getCsrfToken();
       const response = await api.get("/tasks");
       return response.data;
     } catch (error) {
@@ -24,6 +25,26 @@ export const getCsrfToken = async () => {
       return [];
     }
   };
-  
 
+  export const addTask = async (title: string, description: string) => {
+    try {
+      await getCsrfToken(); 
+      const response = await api.post("/tasks", { title, description });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao criar tarefa", error);
+      throw error; 
+    }
+  };
+
+  export const deleteTask = async (id: number) => {
+    try {
+      await getCsrfToken();
+      await api.delete(`/tasks/${id}`);
+    } catch (error) {
+      console.error("Erro ao excluir tarefa", error);
+      throw error;
+    }
+  };
+  
 export default api;

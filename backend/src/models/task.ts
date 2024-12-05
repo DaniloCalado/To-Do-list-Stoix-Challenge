@@ -14,3 +14,8 @@ export const createTask = async (title: string, description: string): Promise<Re
     );
     return result;
 };
+
+export const deleteTask = async (id: number): Promise<ResultSetHeader> => {
+    const [result] = await pool.query<ResultSetHeader>('DELETE FROM tasks WHERE id = ?', [id]);
+    return result;
+};

@@ -1,0 +1,10 @@
+{
+    "name": "todo-list-desafio-stoix",
+    "version": "1.0.0",
+    "scripts": {
+      "start": "docker-compose up --build",
+      "stop": "docker-compose down",
+      "logs": "docker-compose logs -f"
+    }
+  }
+  

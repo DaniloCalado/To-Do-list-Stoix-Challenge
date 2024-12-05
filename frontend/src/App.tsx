@@ -4,7 +4,7 @@ import TaskTable from "./components/TasksTable";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Task } from "./types/task";
-import { deleteTask, fetchTasks } from "./services/api";
+import { deleteTask, fetchTasks, updateTaskCompletion } from "./services/api";
 
 const App: React.FC = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -35,6 +35,20 @@ const App: React.FC = () => {
     }
   };
 
+  const handleToggleCompleted = async (id: number) => {
+    try {
+      const task = tasks.find((t) => t.id === id);
+      if (!task) return;
+      const newStatus = task.completed === 1 ? 0 : 1;
+      await updateTaskCompletion(id, newStatus);
+      const updatedTasks = await fetchTasks();
+      setTasks(updatedTasks);
+      toast.success("Status da tarefa atualizado com sucesso!");
+    } catch (error) {
+      toast.error("Erro ao atualizar status da tarefa.");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <h1 className="text-2xl font-bold text-center mb-4">Minha Lista de Tarefas</h1>
@@ -45,7 +59,7 @@ const App: React.FC = () => {
         isLoading={isLoading}
         onEdit={(id) => console.log("Edit", id)}
         onDelete={handleDeleteTask}
-        onToggleCompleted={(id) => console.log("Toggle", id)}
+        onToggleCompleted={handleToggleCompleted}
       />
     </div>
   );

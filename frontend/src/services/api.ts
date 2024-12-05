@@ -46,5 +46,16 @@ export const getCsrfToken = async () => {
       throw error;
     }
   };
+
+  export const updateTaskCompletion = async (id: number, completed: number) => {
+    try {
+      await getCsrfToken();
+      const response = await api.put(`/tasks/${id}/completed`, { completed });
+      return response.data;
+    } catch (error) {
+      console.error("Erro ao alternar o status de conclusão da tarefa", error);
+      throw error;
+    }
+  };
   
 export default api;

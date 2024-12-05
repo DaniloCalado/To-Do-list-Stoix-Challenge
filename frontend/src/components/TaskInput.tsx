@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api, { getCsrfToken } from "../services/api";
+import { toast } from "react-toastify";
 
 const TaskInput: React.FC = () => {
   const [title, setTitle] = useState("");
@@ -7,29 +8,26 @@ const TaskInput: React.FC = () => {
 
   const handleAddTask = async () => {
     if (!title.trim()) {
-      alert("O título da tarefa é obrigatório!");
+      toast.error("O título da tarefa é obrigatório!");
       return;
     }
 
     try {
-      // Obtém o CSRF Token antes de enviar
       await getCsrfToken();
+      const response = await api.post("/tasks", { title, description });
 
-      // Envia a nova tarefa para o backend
-      await api.post("/tasks", { title, description });
-
-      alert("Tarefa adicionada com sucesso!");
+      toast.success(response.data.message || "Tarefa criada com sucesso!");
       setTitle("");
       setDescription("");
     } catch (error) {
-      console.error("Erro ao adicionar tarefa:", error);
-      alert("Ocorreu um erro ao adicionar a tarefa. Tente novamente.");
+      console.error("Erro ao criar tarefa:", error);
+      toast.error("Erro ao criar a tarefa. Tente novamente mais tarde.");
     }
   };
 
   return (
     <div className="bg-white p-4 shadow rounded-lg max-w-lg mx-auto">
-      <h2 className="text-2xl font-bold mb-4 text-center">Adicionar Nova Tarefa</h2>
+      <h2 className="text-m font-bold mb-4 text-center">Adicionar Nova Tarefa</h2>
       <div className="space-y-4">
         <input
           type="text"

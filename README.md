@@ -1,4 +1,4 @@
-README - Gerenciador de Tarefas
+# Gerenciador de Tarefas
 Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuário criar, editar, deletar e marcar tarefas como concluídas. Ele foi desenvolvido com tecnologias modernas para proporcionar uma experiência fluida e responsiva, tanto em navegadores quanto em dispositivos móveis.
 
 Instalação e Execução

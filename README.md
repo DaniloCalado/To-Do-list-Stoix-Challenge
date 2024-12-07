@@ -1,77 +1,134 @@
 # Gerenciador de Tarefas
+
 Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuário criar, editar, deletar e marcar tarefas como concluídas. Ele foi desenvolvido com tecnologias modernas para proporcionar uma experiência fluida e responsiva, tanto em navegadores quanto em dispositivos móveis.
 
-Instalação e Execução
-Pré-requisitos:
-  -Node.js instalado (versão 16 ou superior recomendada).
-  -Docker e Docker Compose instalados (opcional, caso deseje executar via containers).
-  -Banco de dados MySQL configurado.
+---
 
-Clone o repositório :
+## 🚀 Instalação e Execução
 
-git clone https://github.com/DaniloCalado/To-Do-list-Stoix-Challenge.git
-cd To-Do-list-Stoix-Challenge
+### 🛠 Pré-requisitos
+Antes de começar, verifique se você possui:
+- **Node.js** instalado (versão 16 ou superior é recomendada).
+- **Docker e Docker Compose** instalados, caso prefira executar a aplicação via containers.
+- Um **banco de dados MySQL** configurado.
 
-Crie o banco de dados MySQL Execute o comando abaixo no terminal para criar um banco de dados MySQL:
-CREATE DATABASE nome_do_banco;
-Configure o arquivo .env Na raiz da pasta backend, crie um arquivo chamado .env com as informações de acesso ao banco de dados:
+### 📦 Clone o repositório
+1. Faça o download do projeto em sua máquina clonando o repositório:
+   - Acesse o terminal e digite o comando:
+     git clone https://github.com/DaniloCalado/To-Do-list-Stoix-Challenge.git
 
-DB_HOST=localhost
-DB_USER=nome_do_usuario
-DB_PASSWORD=senha
-DB_NAME=nome_do_banco
-Instale as dependências
+2. Acesse a pasta do projeto:
 
-Acesse a pasta backend e instale as dependências:
+
+### 🗃️ Configuração do Banco de Dados
+
+1. **Crie um banco de dados no MySQL**  
+   Abra o terminal ou o cliente SQL de sua preferência e execute o seguinte comando:
+   ```sql
+   CREATE DATABASE nome_do_banco;
+Configure o arquivo .env na raiz da pasta backend</br>
+Crie um arquivo chamado .env e adicione as informações de conexão com o banco de dados:
+
+.env
+ 
+DB_HOST=localhost</br>
+DB_USER=nome_do_usuario</br>
+DB_PASSWORD=senha</br>
+DB_NAME=nome_do_banco</br>
+
+Crie a tabela tasks no banco de dados</br>
+Para que o backend funcione corretamente, crie a tabela tasks no banco de dados.</br>
+Execute o seguinte comando:
+
+</br>
+CREATE TABLE tasks (</br>
+    id SERIAL PRIMARY KEY,</br>
+    title TEXT NOT NULL,</br>
+    description TEXT,</br>
+    completed BOOLEAN DEFAULT 0,</br>
+    created_at TIMESTAMP DEFAULT NOW()</br>
+);
+
+### Observações
+Substitua nome_do_banco, nome_do_usuario, e senha no arquivo .env com os valores correspondentes ao seu ambiente.</br>
+A tabela tasks é obrigatória, pois o modelo do backend depende dela para funcionar corretamente.
+
+---
+
+### 🔧 Instalação e Execução Manual
+
+#### Backend
+1. Acesse a pasta `backend`:
 cd backend
+
+2. Instale as dependências:
 npm install
-Inicie o backend:
+
+3. Inicie o servidor backend:
 npm run dev
 
-Acesse a pasta frontend e instale as dependências:
+
+
+#### Frontend
+1. Acesse a pasta `frontend`:
 cd frontend
+
+2. Instale as dependências:
 npm install
-Inicie o frontend:
+
+3. Inicie o servidor frontend:
 npm start
 
-Acesse o aplicativo no navegador em http://localhost:3000.
+4. Após isso, o aplicativo estará disponível em:  
+**http://localhost:3000**
 
-Execução via Docker
-Suba os containers com Docker Compose Na raiz do projeto, execute:
+---
+
+
+### 🐳 Execução via Docker
+
+1. Na raiz do projeto, execute o comando para subir os containers:
 docker-compose up
-O backend será iniciado na porta 4000, e o frontend na porta 3000.
 
-Acesse o aplicativo no navegador Abra http://localhost:3000.
+2. O backend será iniciado na porta `4000`, e o frontend na porta `3000`.
+3. Acesse o aplicativo no navegador em:  
+**http://localhost:3000**
 
+---
 
-Funcionalidades
-Gerenciamento de Tarefas
+## ✨ Funcionalidades
 
-Criar, editar, deletar e listar tarefas.
-As tarefas possuem:
-Data (quando foram criadas).
-Título e Descrição.
-Checkbox para marcar como concluídas.
-Modais de Confirmação
+### 📋 Gerenciamento de Tarefas
+- Criação, edição, exclusão e listagem de tarefas.
+- Cada tarefa possui:
+- **Data de criação** (adicionada automaticamente).
+- **Título** e **Descrição**.
+- Um **checkbox** para marcar como concluída.
 
-Edição:
-O botão "Confirmar Edição" só é habilitado se houver alterações nos campos de título ou descrição.
-Deleção:
-Modal com o nome da tarefa para confirmar ou cancelar a exclusão.
+### 🔄 Modais de Confirmação
+- **Edição de tarefas**:  
+O botão "Confirmar Edição" é habilitado somente quando há alterações no título ou na descrição.
+- **Exclusão de tarefas**:  
+Um modal exibe o nome da tarefa para confirmação ou cancelamento.
 
-Notificações (Toast) para melhor visualização do usuário nas ações que ele realizar.
+### 🔔 Notificações
+- Notificações (Toast) informam o usuário sobre o sucesso ou falha de ações como criar, editar ou excluir uma tarefa.
 
+### 💅 Estilização
+O projeto utiliza **Tailwind CSS** para garantir:
+- Uma interface moderna e responsiva.
+- Experiência de uso fluida em dispositivos móveis e desktops.
 
-Utilizei Tailwind CSS para uma interface moderna e responsiva, garantindo uma ótima experiência em dispositivos móveis e desktops.
+---
 
-Tecnologias Utilizadas
+## 🛠 Tecnologias Utilizadas
 
-Backend
-Node.js com TypeScript
-MySQL para o banco de dados
-Express para gerenciamento de rotas
+### Backend
+- **Node.js** com **TypeScript**
+- **MySQL** para o banco de dados
+- **Express** para gerenciamento de rotas
 
-Frontend
-React.js com TypeScript
-Axios para comunicação com a API
-Tailwind CSS para estilização
+### Frontend
+- **React.js** com **TypeScript**
+- **Axios** para comunicação com a API
+- **Tailwind CSS** para estilização

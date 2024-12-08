@@ -84,18 +84,6 @@ npm start
 
 ---
 
-
-### 🐳 Execução via Docker
-
-1. Na raiz do projeto, execute o comando para subir os containers:
-docker-compose up
-
-2. O backend será iniciado na porta `4000`, e o frontend na porta `3000`.
-3. Acesse o aplicativo no navegador em:  
-**http://localhost:3000**
-
----
-
 ## ✨ Funcionalidades
 
 ### 📋 Gerenciamento de Tarefas

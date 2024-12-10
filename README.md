@@ -1,4 +1,14 @@
-Acesse: https://to-do-list-stoix-challenge-tphk.vercel.app/
+## 🛠 Deploy realizado
+- Acesse: https://to-do-list-stoix-challenge-tphk.vercel.app/
+
+ Backend
+- render
+  
+ Frontend
+- Vercel
+
+Banco de dados:
+- Supabase
 
 # Gerenciador de Tarefas
 

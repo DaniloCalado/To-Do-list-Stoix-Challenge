@@ -24,5 +24,5 @@ app.use('/api/tasks', taskRoutes);
 // });
 
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+const PORT = parseInt(process.env.PORT || "10000", 10);
+app.listen(PORT, "0.0.0.0",  () => console.log(`Servidor rodando na porta ${PORT}`));

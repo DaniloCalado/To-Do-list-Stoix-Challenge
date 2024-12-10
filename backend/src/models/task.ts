@@ -4,43 +4,50 @@ import { TaskInput } from '../interfaces/interfaces';
 
 
 export const getAllTasks = async () => {
-    const [rows] = await pool.query('SELECT * FROM tasks');
+    const { rows } = await pool.query('SELECT * FROM tasks');
     return rows;
 };
 
-export const createTask = async (title: string, description: string): Promise<ResultSetHeader> => {
-    const [result] = await pool.query<ResultSetHeader>(
-        'INSERT INTO tasks (title, description) VALUES (?, ?)',
+export const createTask = async (title: string, description: string) => {
+    const { rows } = await pool.query(
+        'INSERT INTO tasks (title, description) VALUES ($1, $2) RETURNING *',
         [title, description]
     );
-    return result;
+    return rows[0];
 };
 
-export const deleteTask = async (id: number): Promise<ResultSetHeader> => {
-    const [result] = await pool.query<ResultSetHeader>('DELETE FROM tasks WHERE id = ?', [id]);
-    return result;
+// Deletar uma tarefa
+export const deleteTask = async (id: number): Promise<number> => {
+    const result = await pool.query('DELETE FROM tasks WHERE id = $1', [id]);
+    return result.rowCount || 0; // Retorna 0 se rowCount for null
 };
 
+// Atualizar uma tarefa
 export const updateTask = async (
     id: number,
     task: Partial<TaskInput & { completed: boolean }>
-): Promise<ResultSetHeader> => {
+): Promise<number> => {
     const { title, description } = task;
-    const [result] = await pool.query<ResultSetHeader>(
-        'UPDATE tasks SET title = ?, description = ? WHERE id = ?',
+
+    const result = await pool.query(
+        'UPDATE tasks SET title = $1, description = $2 WHERE id = $3',
         [title, description, id]
     );
-    return result;
+
+    return result.rowCount || 0; // Retorna 0 se rowCount for null
 };
 
+// Atualizar o status de completude
 export const updateCompletedStatus = async (
     id: number,
     task: Partial<TaskInput & { completed: boolean }>
-): Promise<ResultSetHeader> => {
-    const { completed} = task;
-    const [result] = await pool.query<ResultSetHeader>(
-        'UPDATE tasks SET completed = ? WHERE id = ?',
+): Promise<number> => {
+    const { completed } = task;
+
+    const result = await pool.query(
+        'UPDATE tasks SET completed = $1 WHERE id = $2',
         [completed, id]
     );
-    return result;
+
+    return result.rowCount || 0; // Retorna 0 se rowCount for null
 };

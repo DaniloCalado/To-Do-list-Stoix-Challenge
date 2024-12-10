@@ -25,7 +25,12 @@ export const removeTask = async (req: Request<{ id: string }>, res: Response): P
     const { id } = req.params;
 
     try {
-        const result = await deleteTask(Number(id));
+        const rowsAffected = await deleteTask(Number(id));
+        if (rowsAffected === 0) {
+            res.status(404).json({ error: 'Tarefa não encontrada' });
+            return;
+        }
+
         res.json({ message: 'Tarefa deletada com sucesso' });
     } catch (error) {
         res.status(500).json({ error: 'Erro ao deletar tarefa' });
@@ -40,14 +45,15 @@ export const editTask = async (
     const { title, description } = req.body;
 
     try {
-        const result = await updateTask(Number(id), { title, description });
-        if (result.affectedRows === 0) {
-            res.status(404).json({ error: 'Tarefa não Econtrada' });
+        const rowsAffected = await updateTask(Number(id), { title, description });
+        if (rowsAffected === 0) {
+            res.status(404).json({ error: 'Tarefa não encontrada' });
             return;
         }
+
         res.json({ id: Number(id), title, description });
     } catch (error) {
-        res.status(500).json({ error: 'Erro ao Editar Tarefa' });
+        res.status(500).json({ error: 'Erro ao editar tarefa' });
     }
 };
 
@@ -59,8 +65,8 @@ export const editCompletedStatus = async (
     const { completed } = req.body;
 
     try {
-        const result = await updateCompletedStatus(Number(id), { completed });
-        if (result.affectedRows === 0) {
+        const rowsAffected = await updateCompletedStatus(Number(id), { completed });
+        if (rowsAffected === 0) {
             res.status(404).json({ error: 'Tarefa não encontrada' });
             return;
         }

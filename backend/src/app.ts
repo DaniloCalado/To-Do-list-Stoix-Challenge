@@ -10,7 +10,8 @@ dotenv.config();
 const app = express();
 
 
-app.use(cors({ origin: '*'})); // Ajuste para produção depois
+app.use(cors({ origin: 'https://to-do-list-stoix-challenge.vercel.app', credentials: true }));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 // app.use(csrf({ cookie: true }));

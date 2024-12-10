@@ -2,7 +2,7 @@ import axios from "axios";
 import { Task } from "../types/task";
 
 const api = axios.create({
-  baseURL: "http://localhost:4000/api",
+  baseURL: "https://to-do-list-stoix-challenge.onrender.com//api",
   withCredentials: true,
 });
 

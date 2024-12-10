@@ -27,7 +27,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "tsx src/app.ts",
+    "dev": "ts-node-dev src/app.ts",
     "start": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

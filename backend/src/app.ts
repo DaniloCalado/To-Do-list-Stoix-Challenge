@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import csrf from 'csurf';
+// import csrf from 'csurf';
 import dotenv from 'dotenv';
 
 dotenv.config();

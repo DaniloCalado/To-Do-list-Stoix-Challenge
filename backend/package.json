@@ -21,18 +21,17 @@
   },
   "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
   "engines": {
     "node": "18"
   },
   "scripts": {
     "build": "tsc",
     "dev": "ts-node-dev src/app.ts",
-    "start": "ts-node src/app.ts",
+    "start": "node dist/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "keywords": ["backend", "typescript", "nodejs", "express"],
+  "author": "Seu Nome",
+  "license": "MIT",
+  "description": "API backend para aplicação test da stoix to do list, construída com Node.js e TypeScript."
 }

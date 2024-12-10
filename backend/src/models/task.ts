@@ -16,10 +16,9 @@ export const createTask = async (title: string, description: string) => {
     return rows[0];
 };
 
-// Deletar uma tarefa
 export const deleteTask = async (id: number): Promise<number> => {
     const result = await pool.query('DELETE FROM tasks WHERE id = $1', [id]);
-    return result.rowCount || 0; // Retorna 0 se rowCount for null
+    return result.rowCount || 0; 
 };
 
 // Atualizar uma tarefa
@@ -34,10 +33,9 @@ export const updateTask = async (
         [title, description, id]
     );
 
-    return result.rowCount || 0; // Retorna 0 se rowCount for null
+    return result.rowCount || 0; 
 };
 
-// Atualizar o status de completude
 export const updateCompletedStatus = async (
     id: number,
     task: Partial<TaskInput & { completed: boolean }>
@@ -49,5 +47,5 @@ export const updateCompletedStatus = async (
         [completed, id]
     );
 
-    return result.rowCount || 0; // Retorna 0 se rowCount for null
+    return result.rowCount || 0; 
 };

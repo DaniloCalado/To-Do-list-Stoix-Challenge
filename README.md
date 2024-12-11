@@ -126,6 +126,7 @@ O projeto utiliza **Tailwind CSS** para garantir:
 - **Node.js** com **TypeScript**
 - **MySQL** para o banco de dados
 - **Express** para gerenciamento de rotas
+- CSRF-token
 
 ### Frontend
 - **React.js** com **TypeScript**

@@ -22,7 +22,6 @@ Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuá
 ### 🛠 Pré-requisitos
 Antes de começar, verifique se você possui:
 - **Node.js** instalado (versão 16 ou superior é recomendada).
-- **Docker e Docker Compose** instalados, caso prefira executar a aplicação via containers.
 - Um **banco de dados MySQL** configurado.
 
 ### 📦 Clone o repositório
@@ -31,7 +30,6 @@ Antes de começar, verifique se você possui:
      git clone https://github.com/DaniloCalado/To-Do-list-Stoix-Challenge.git
 
 2. Acesse a pasta do projeto:
-
 
 ### 🗃️ Configuração do Banco de Dados
 

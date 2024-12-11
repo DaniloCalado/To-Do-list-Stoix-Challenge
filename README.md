@@ -10,10 +10,13 @@
 Banco de dados:
 - Supabase
 
+obs: caso você acesse pelo celular, lembre-se de desativar duas opções nas configurações do navegador caso estejam ativiadas:
+- "Impedir Rastreamento entre Sites"
+- "Bloquear Todos os Cookies"
+
 # Gerenciador de Tarefas
 
 Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuário criar, editar, deletar e marcar tarefas como concluídas. Ele foi desenvolvido com tecnologias modernas para proporcionar uma experiência fluida e responsiva, tanto em navegadores quanto em dispositivos móveis.
-
 
 ---
 

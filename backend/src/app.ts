@@ -38,6 +38,7 @@ const csrfProtection = csrf({
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production', 
     sameSite: 'none',
+    domain: 'to-do-list-stoix-challenge.onrender.com',
   }
 });
 

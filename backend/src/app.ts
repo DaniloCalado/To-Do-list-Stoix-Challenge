@@ -10,7 +10,10 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-  'https://to-do-list-stoix-challenge-tphk.vercel.app',
+  "https://to-do-list-stoix-challenge-tphk.vercel.app",
+  "https://to-do-list-stoix-challenge-t-git-2f9243-danilo-calados-projects.vercel.app",
+  "https://to-do-list-stoix-challenge-tphk-mvsuptu4q.vercel.app",
+  "https://to-do-list-stoix-challenge.onrender.com",
   'http://localhost:3000'
 ];
 
@@ -26,7 +29,7 @@ app.use(
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'X-CSRF-Token'],
+    allowedHeaders: ['Content-Type', 'X-CSRF-Token', 'Authorization'],
   })
 );
 
@@ -36,7 +39,7 @@ app.use(cookieParser());
 const csrfProtection = csrf({
   cookie: {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production', 
+    secure: true, 
     sameSite: 'none',
     domain: 'to-do-list-stoix-challenge.onrender.com',
   }

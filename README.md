@@ -10,7 +10,7 @@
 Banco de dados:
 - Supabase
 
-obs: caso você acesse pelo celular, lembre-se de desativar duas opções nas configurações do navegador caso estejam ativiadas:
+obs: caso você acesse pelo celular, lembre-se de desativar duas opções nas configurações do navegador caso estejam ativadas:
 - "Impedir Rastreamento entre Sites"
 - "Bloquear Todos os Cookies"
 

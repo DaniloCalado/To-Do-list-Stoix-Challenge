@@ -20,7 +20,7 @@ Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuá
 
 ---
 
-## 🚀 Instalação e Execução
+## 🚀 Clonando o repositório e criando o banco de dados
 
 ### 🛠 Pré-requisitos
 Antes de começar, verifique se você possui:

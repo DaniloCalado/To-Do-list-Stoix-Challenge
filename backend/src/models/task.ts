@@ -1,7 +1,5 @@
 import { pool } from '../config/database';
-import { ResultSetHeader } from 'mysql2';
 import { TaskInput } from '../interfaces/interfaces';
-
 
 export const getAllTasks = async () => {
     const { rows } = await pool.query('SELECT * FROM tasks');
@@ -21,7 +19,6 @@ export const deleteTask = async (id: number): Promise<number> => {
     return result.rowCount || 0; 
 };
 
-// Atualizar uma tarefa
 export const updateTask = async (
     id: number,
     task: Partial<TaskInput & { completed: boolean }>

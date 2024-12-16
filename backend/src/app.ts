@@ -11,20 +11,17 @@ const app = express();
 
 const allowedOrigins = [
   "https://to-do-list-stoix-challenge-tphk.vercel.app",
-  "https://to-do-list-stoix-challenge-t-git-2f9243-danilo-calados-projects.vercel.app",
-  "https://to-do-list-stoix-challenge-tphk-mvsuptu4q.vercel.app",
   "https://to-do-list-stoix-challenge.onrender.com",
-  'http://localhost:3000'
+  "http://localhost:3000"
 ];
 
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
       } else {
-        return callback(new Error('CORS policy does not allow access from this origin'), false);
+        callback(new Error("CORS policy does not allow access from this origin"));
       }
     },
     credentials: true,
@@ -39,35 +36,20 @@ app.use(cookieParser());
 const csrfProtection = csrf({
   cookie: {
     httpOnly: true,
-    secure: true, 
+    secure: true,
     sameSite: 'none',
-    domain: 'to-do-list-stoix-challenge.onrender.com',
-  }
+    domain: process.env.COOKIE_DOMAIN || 'to-do-list-stoix-challenge.onrender.com',
+  },
 });
-
-app.use((req, res, next) => {
-  if (['POST', 'PUT', 'DELETE'].includes(req.method)) {
-    console.log(`Método: ${req.method}`);
-    console.log(`Cookies:`, req.cookies);
-    console.log(`X-CSRF-Token:`, req.headers['x-csrf-token']);
-  }
-  next();
-});
-
-app.use((req, res, next) => {
-  if (['POST', 'PUT', 'DELETE'].includes(req.method)) {
-    csrfProtection(req, res, next);
-  } else {
-    next();
-  }
-});
-
-import taskRoutes from './routes/taskRoutes';
-app.use('/api/tasks', taskRoutes);
 
 app.get('/api/csrf-token', csrfProtection, (req, res) => {
   res.json({ csrfToken: req.csrfToken() });
 });
 
+import taskRoutes from './routes/taskRoutes';
+app.use('/api/tasks', taskRoutes);
+
 const PORT = parseInt(process.env.PORT || "10000", 10);
-app.listen(PORT, "0.0.0.0", () => console.log(`Servidor rodando na porta ${PORT}`));
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});

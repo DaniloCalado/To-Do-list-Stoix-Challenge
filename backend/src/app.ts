@@ -11,6 +11,7 @@ const app = express();
 
 const allowedOrigins = [
   "https://to-do-list-stoix-challenge-tphk.vercel.app",
+  "https://to-do-list-stoix-challenge-tphk-rac64szvi.vercel.app/",
   "https://to-do-list-stoix-challenge-production.up.railway.app",
   "http://localhost:3000"
 ];

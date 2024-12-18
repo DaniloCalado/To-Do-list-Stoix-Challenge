@@ -2,7 +2,7 @@
 - Acesse: https://to-do-list-stoix-challenge-tphk.vercel.app/
 
  Backend
-- render
+- Railway
   
  Frontend
 - Vercel

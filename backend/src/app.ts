@@ -11,7 +11,7 @@ const app = express();
 
 const allowedOrigins = [
   "https://to-do-list-stoix-challenge-tphk.vercel.app",
-  "https://to-do-list-stoix-challenge.onrender.com",
+  "https://to-do-list-stoix-challenge-production.up.railway.app",
   "http://localhost:3000"
 ];
 
@@ -49,7 +49,7 @@ app.get('/api/csrf-token', csrfProtection, (req, res) => {
 import taskRoutes from './routes/taskRoutes';
 app.use('/api/tasks', taskRoutes);
 
-const PORT = parseInt(process.env.PORT || "10000", 10);
+const PORT = parseInt(process.env.PORT || "8080", 10);
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });

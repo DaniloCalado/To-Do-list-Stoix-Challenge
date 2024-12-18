@@ -36,9 +36,9 @@ app.use(cookieParser());
 const csrfProtection = csrf({
   cookie: {
     httpOnly: true,
-    secure: true,
+    secure: true, 
     sameSite: 'none',
-    domain: process.env.COOKIE_DOMAIN || 'to-do-list-stoix-challenge.onrender.com',
+    domain: process.env.COOKIE_DOMAIN, 
   },
 });
 

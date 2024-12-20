@@ -16,7 +16,7 @@ export const createTask = async (title: string, description: string) => {
 
 export const deleteTask = async (id: number): Promise<number> => {
     const result = await pool.query('DELETE FROM tasks WHERE id = $1', [id]);
-    return result.rowCount || 0; 
+    return result.rowCount || 0;
 };
 
 export const updateTask = async (
@@ -30,19 +30,27 @@ export const updateTask = async (
         [title, description, id]
     );
 
-    return result.rowCount || 0; 
+    return result.rowCount || 0;
 };
 
 export const updateCompletedStatus = async (
     id: number,
-    task: Partial<TaskInput & { completed: boolean }>
+    task: { completed: number }  // Aqui tratamos o completed como um número
 ): Promise<number> => {
     const { completed } = task;
 
-    const result = await pool.query(
-        'UPDATE tasks SET completed = $1 WHERE id = $2',
-        [completed, id]
-    );
+    const query = `
+    UPDATE tasks
+    SET 
+      completed = $1,
+      completed_at = NOW()
+    WHERE id = $2
+    AND completed != $1
+  `;
 
-    return result.rowCount || 0; 
-};
+    const result = await pool.query(query, [completed, id]);
+
+    return result.rowCount || 0;
+}
+
+

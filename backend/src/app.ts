@@ -50,7 +50,7 @@ app.get('/api/csrf-token', csrfProtection, (req, res) => {
 import taskRoutes from './routes/taskRoutes';
 app.use('/api/tasks', taskRoutes);
 
-const PORT = parseInt(process.env.PORT || "8080", 10);
+const PORT = parseInt(process.env.PORT || "4000", 10);
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });

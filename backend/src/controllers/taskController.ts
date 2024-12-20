@@ -58,7 +58,7 @@ export const editTask = async (
 };
 
 export const editCompletedStatus = async (
-    req: Request<{ id: string }, {}, { completed: boolean }>,
+    req: Request<{ id: string }, {}, { completed: number }>,
     res: Response,
 ): Promise<void> => {
     const { id } = req.params;
@@ -66,6 +66,7 @@ export const editCompletedStatus = async (
 
     try {
         const rowsAffected = await updateCompletedStatus(Number(id), { completed });
+
         if (rowsAffected === 0) {
             res.status(404).json({ error: 'Tarefa não encontrada' });
             return;
@@ -73,6 +74,10 @@ export const editCompletedStatus = async (
 
         res.json({ id: Number(id), completed });
     } catch (error) {
+        console.error("Erro ao atualizar status da tarefa:", error);
         res.status(500).json({ error: 'Erro ao atualizar o status da tarefa' });
     }
 };
+
+
+

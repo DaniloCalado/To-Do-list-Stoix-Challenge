@@ -36,11 +36,25 @@ export const updateTask = async (
 export const updateCompletedStatus = async (
     id: number,
     task: Partial<TaskInput & { completed: boolean }>
-): Promise<ResultSetHeader> => {
-    const { completed} = task;
+  ): Promise<ResultSetHeader> => {
+    const { completed } = task;
+  
+    const query = `
+      UPDATE tasks
+      SET 
+        completed = ?,
+        completed_at = CASE
+          WHEN ? THEN NOW() 
+          ELSE completed_at
+        END
+      WHERE id = ?
+    `;
+  
     const [result] = await pool.query<ResultSetHeader>(
-        'UPDATE tasks SET completed = ? WHERE id = ?',
-        [completed, id]
+      query,
+      [completed, completed, id]
     );
+  
     return result;
-};
+  };
+  

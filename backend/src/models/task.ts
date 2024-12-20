@@ -35,7 +35,7 @@ export const updateTask = async (
 
 export const updateCompletedStatus = async (
     id: number,
-    task: { completed: number }  // Aqui tratamos o completed como um número
+    task: { completed: number }
 ): Promise<number> => {
     const { completed } = task;
 

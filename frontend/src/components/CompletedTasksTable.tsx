@@ -4,7 +4,7 @@ import { format } from "date-fns";
 import { pt } from "date-fns/locale";
 import { Task } from "../types/task";
 
-interface TaskTableProps {
+interface CompletedTasksTableProps {
   tasks: Task[];
   isLoading: boolean;
   onEdit: (id: number) => void;
@@ -12,32 +12,34 @@ interface TaskTableProps {
   onToggleCompleted: (id: number) => void;
 }
 
-const TaskTable: React.FC<TaskTableProps> = ({
+const CompletedTasksTable: React.FC<CompletedTasksTableProps> = ({
   tasks,
   isLoading,
   onEdit,
   onDelete,
   onToggleCompleted,
 }) => {
+  const completedTasks = tasks.filter((task) => task.completed === 1);
+
   if (isLoading) {
     return <p className="text-center">Carregando tarefas...</p>;
   }
 
-  if (tasks.length === 0) {
-    return <p className="text-center bg-gray-300 text-gray-500 py-12">Não tem tarefas a fazer</p>;
+  if (completedTasks.length === 0) {
+    return (
+      <p className="text-center bg-gray-300 text-gray-500 py-12">
+        Nenhuma tarefa concluída
+      </p>
+    );
   }
 
-  const sortedTasks = [...tasks].sort(
-    (a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
-  );
-  
   return (
     <div className="overflow-x-auto py-4 md:px-36">
-      <h2 className="text-center mx-auto font-bold text-xl">Tarefas a Fazer</h2>
+      <h2 className="text-center mx-auto font-bold text-xl">Tarefas Concluídas</h2>
       <table className="min-w-full bg-white border border-gray-200">
         <thead>
           <tr className="bg-gray-100 text-left">
-            <th className="w-1/6 px-4 py-2">Data de Criação</th>
+            <th className="w-1/6 px-4 py-2">Data de Conclusão</th>
             <th className="w-1/6 px-4 py-2">Título</th>
             <th className="w-2/6 sm:py-4 py-2 hidden md:block">Descrição</th>
             <th className="w-1/6 md:px-4 py-2">Concluída</th>
@@ -45,12 +47,14 @@ const TaskTable: React.FC<TaskTableProps> = ({
           </tr>
         </thead>
         <tbody>
-          {sortedTasks.map((task) => (
+          {completedTasks.map((task) => (
             <tr key={task.id} className="border-b border-gray-300">
               <td className="px-1 md:px-4 py-2">
-                {format(new Date(task.created_at), "dd/MM/yyyy", {
-                  locale: pt,
-                })}
+                {task.completed_at
+                  ? format(new Date(task.completed_at), "dd/MM/yyyy", {
+                      locale: pt,
+                    })
+                  : "Não disponível"}
               </td>
               <td className="px-4 py-2">{task.title}</td>
               <td className="px-4 py-2 w-96 hidden md:table">{task.description}</td>
@@ -84,4 +88,4 @@ const TaskTable: React.FC<TaskTableProps> = ({
   );
 };
 
-export default TaskTable;
+export default CompletedTasksTable;

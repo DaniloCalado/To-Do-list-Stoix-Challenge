@@ -35,12 +35,25 @@ export const updateTask = async (
 
 export const updateCompletedStatus = async (
     id: number,
-    task: Partial<TaskInput & { completed: boolean }>
-): Promise<ResultSetHeader> => {
-    const { completed} = task;
+    completed: number // 0 ou 1, representando o estado da tarefa
+  ): Promise<ResultSetHeader> => {
+    const query = `
+      UPDATE tasks
+      SET 
+        completed = ?, 
+        completed_at = CASE 
+          WHEN ? = 1 THEN NOW()  -- Atualiza a data se o status for 1
+          ELSE completed_at     -- Mantém a data atual se o status for 0
+        END
+      WHERE id = ?
+        AND completed != ?;    -- Garante que a atualização só ocorre se houver mudança no status
+    `;
+  
     const [result] = await pool.query<ResultSetHeader>(
-        'UPDATE tasks SET completed = ? WHERE id = ?',
-        [completed, id]
+      query,
+      [completed, completed, id, completed] // Parâmetros para os placeholders
     );
+  
     return result;
-};
+  };
+  

@@ -2,7 +2,7 @@
 - Acesse: https://to-do-list-stoix-challenge-tphk.vercel.app/
 
  Backend
-- render
+- Railway
   
  Frontend
 - Vercel
@@ -12,7 +12,8 @@ Banco de dados:
 
 # Gerenciador de Tarefas
 
-Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuário criar, editar, deletar e marcar tarefas como concluídas. Ele foi desenvolvido com tecnologias modernas para proporcionar uma experiência fluida e responsiva, tanto em navegadores quanto em dispositivos móveis.
+Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuário criar, editar, deletar e marcar tarefas como concluídas. Se não tiver tarefas nem concluidas, nem criadas , apaecerá umamensagem. Ao criar uma tarefa , aparecerá uma tabela com de tarefas criadas e aoclicar no checkbox deconcluida , aparecerá uma tabela abaixo com tabelas concluidas e sua data de conclusção. caso o usuario queira deletar a tarefa ou editar , existe icones de ação para isso.
+ O projeto foi desenvolvido com tecnologias modernas para proporcionar uma experiência fluida e responsiva, tanto em navegadores quanto em dispositivos móveis.
 
 
 ---

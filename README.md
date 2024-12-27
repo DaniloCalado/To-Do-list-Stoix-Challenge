@@ -10,21 +10,20 @@
 Banco de dados:
 - Supabase
 
-obs: caso você acesse pelo celular, lembre-se de desativar duas opções nas configurações do navegador caso estejam ativadas:
-- "Impedir Rastreamento entre Sites"
-- "Bloquear Todos os Cookies"
-
 # Gerenciador de Tarefas
 
-Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuário criar, editar, deletar e marcar tarefas como concluídas. Ele foi desenvolvido com tecnologias modernas para proporcionar uma experiência fluida e responsiva, tanto em navegadores quanto em dispositivos móveis.
+Este projeto é uma aplicação de gerenciamento de tarefas que permite ao usuário criar, editar, deletar e marcar tarefas como concluídas. Se não tiver tarefas nem concluidas, nem criadas , apaecerá umamensagem. Ao criar uma tarefa , aparecerá uma tabela com de tarefas criadas e aoclicar no checkbox deconcluida , aparecerá uma tabela abaixo com tabelas concluidas e sua data de conclusção. caso o usuario queira deletar a tarefa ou editar , existe icones de ação para isso.
+ O projeto foi desenvolvido com tecnologias modernas para proporcionar uma experiência fluida e responsiva, tanto em navegadores quanto em dispositivos móveis.
+
 
 ---
 
-## 🚀 Clonando o repositório e criando o banco de dados
+## 🚀 Instalação e Execução
 
 ### 🛠 Pré-requisitos
 Antes de começar, verifique se você possui:
 - **Node.js** instalado (versão 16 ou superior é recomendada).
+- **Docker e Docker Compose** instalados, caso prefira executar a aplicação via containers.
 - Um **banco de dados MySQL** configurado.
 
 ### 📦 Clone o repositório
@@ -33,6 +32,7 @@ Antes de começar, verifique se você possui:
      git clone https://github.com/DaniloCalado/To-Do-list-Stoix-Challenge.git
 
 2. Acesse a pasta do projeto:
+
 
 ### 🗃️ Configuração do Banco de Dados
 
@@ -129,7 +129,6 @@ O projeto utiliza **Tailwind CSS** para garantir:
 - **Node.js** com **TypeScript**
 - **MySQL** para o banco de dados
 - **Express** para gerenciamento de rotas
-- CSRF-token
 
 ### Frontend
 - **React.js** com **TypeScript**
